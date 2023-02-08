@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,12 +14,12 @@ public class GameManager : MonoBehaviour
     public static GameManager GM;
     public static int currentLevel = 0;
     public static int gameObjectArray;
-    private const int highestLevel = 9;             // 总共关卡数：10
+    private const int highestLevel = 7;             // 总共关卡数：8
     private static bool isLoadingLevel = false;
+    public static bool isMovable = true;          // 是否可操作
 
-    public Component blackScreen;
+    public GameObject blackScreen;
     public GameObject txt;
-    public float fadeSpeed = 1.5f;
 
     private const string DIR_DATA = "/Data/";
     private const string FILE_STORY_START = "Story_Start.txt";
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     private string PATH_STORY_START;
     private string PATH_STORY_END;
+    
     
 
     private void Awake()
@@ -101,7 +103,7 @@ public class GameManager : MonoBehaviour
             {
                 // 游戏胜利
                 isLoadingLevel = true;
-                Time.timeScale = 0;
+                StartCoroutine(StoryEnd());
                 
                 Debug.Log("shit" );
             }
@@ -113,40 +115,122 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StoryStart()
     {
-        Time.timeScale = 0;
-
-        PATH_STORY_START = Application.dataPath + DIR_DATA + FILE_STORY_START;
-        PATH_STORY_END = Application.dataPath + DIR_DATA + FILE_STORY_END;
+        isMovable = false;
         
-        blackScreen = GameObject.Find("Black").GetComponent<RawImage>();
+        PATH_STORY_START = Application.dataPath + DIR_DATA + FILE_STORY_START;
+        
+        blackScreen = GameObject.Find("Black");
         txt = GameObject.Find("TXT");
 
-        txt.GetComponent<TMP_Text>().text = File.ReadAllText(PATH_STORY_START);
+        
+        // file is here. file I/O
 
+        txt.GetComponent<TMP_Text>().text = "";
+        txt.GetComponent<TMP_Text>().color = new Color(1,1,1,0);
+        txt.GetComponent<TMP_Text>().text = File.ReadAllText(PATH_STORY_START);
+        
+        
         // black screen is here
+        
+        if (!blackScreen.activeSelf)
+        {
+            blackScreen.SetActive(true);
+        }
+        
+        blackScreen.GetComponent<RawImage>().color = Color.black;
+
+        
         // text fade in
         
+        float textFadeSpeed = 0.05f;
+        float textFadeTime = 0.04f;
+
+        while (true)
+        {
+            if (txt.GetComponent<TMP_Text>().color.a >= 1)
+            { Debug.Log("break"); break; }
+
+            txt.GetComponent<TMP_Text>().color = new Color(1,1,1,txt.GetComponent<TMP_Text>().color.a + textFadeSpeed);
+            Debug.Log("waht");
+
+            yield return new WaitForSeconds(textFadeTime);
+            
+        }
+        
+        
         // last 10 secs
+
+        yield return new WaitForSeconds(11.51f);
+        
         
         // text fade out
         // black screen gone
 
-        Time.timeScale = 1;
+        blackScreen.SetActive(false);
+        txt.SetActive(false);
+
+        isMovable = true;
         
-        yield return null;
     }
 
     IEnumerator StoryEnd()
     {
-        Time.timeScale = 0;
+        isMovable = false;
+        
+        PATH_STORY_END = Application.dataPath + DIR_DATA + FILE_STORY_END;
+        
+        blackScreen = GameObject.Find("Black");
+        txt = GameObject.Find("TXT");
+
+        if(!blackScreen.activeSelf) {blackScreen.SetActive(true);}
+        blackScreen.GetComponent<RawImage>().color = Color.clear;
+        
+        if(!txt.activeSelf){txt.SetActive(true);}
+        txt.GetComponent<TMP_Text>().text = "";
+        txt.GetComponent<TMP_Text>().color = new Color(1,1,1,0);
+        txt.GetComponent<TMP_Text>().text = File.ReadAllText(PATH_STORY_END);
+        
         
         // black fade in
         
-        // last 2 secs
+        float blackFadeSpeed = 0.1f;
+        float blackFadeTime = 0.1f;
+
+        while (true)
+        {
+            if (blackScreen.GetComponent<RawImage>().color.a >= 1)
+            { Debug.Log("break"); break; }
+
+            blackScreen.GetComponent<RawImage>().color = new Color(0,0,0,blackScreen.GetComponent<RawImage>().color.a + blackFadeSpeed);
+            Debug.Log("waht");
+
+            yield return new WaitForSeconds(blackFadeTime);
+            
+        }
         
+        // last 2 secs
+
+        yield return new WaitForSeconds(2f);
+
         // text fade in 
 
-        yield return null;
+        
+        
+        float textFadeSpeed = 0.05f;
+        float textFadeTime = 0.04f;
+
+        while (true)
+        {
+            if (txt.GetComponent<TMP_Text>().color.a >= 1)
+            { Debug.Log("break"); break; }
+
+            txt.GetComponent<TMP_Text>().color = new Color(1,1,1,txt.GetComponent<TMP_Text>().color.a + textFadeSpeed);
+            Debug.Log("waht");
+
+            yield return new WaitForSeconds(textFadeTime);
+            
+        }
+        
     }
 
     

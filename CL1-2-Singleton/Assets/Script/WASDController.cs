@@ -25,7 +25,7 @@ public class WASDController : MonoBehaviour
         
         //  WASD
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if ((Input.GetKey(KeyCode.UpArrow))&(GameManager.isMovable))
         {
             // transform.position = new Vector3(transform.position.x, transform.position.y + 0.05f);
             if (_rb.velocity.y < 0)
@@ -34,7 +34,7 @@ public class WASDController : MonoBehaviour
             _rb.AddForce(Vector2.up * forceAmount, ForceMode2D.Force);
         }
         
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if ((Input.GetKey(KeyCode.LeftArrow))&(GameManager.isMovable))
         {
             // transform.position = new Vector3(transform.position.x - 0.05f, transform.position.y);
             if (_rb.velocity.x > 0)
@@ -42,7 +42,7 @@ public class WASDController : MonoBehaviour
             _rb.AddForce(Vector2.left * forceAmount, ForceMode2D.Force);
         }
         
-        if (Input.GetKey(KeyCode.DownArrow))
+        if ((Input.GetKey(KeyCode.DownArrow))&(GameManager.isMovable))
         {
             // transform.position = new Vector3(transform.position.x, transform.position.y - 0.05f);
             if (_rb.velocity.y > 0)
@@ -50,7 +50,7 @@ public class WASDController : MonoBehaviour
             _rb.AddForce(Vector2.down * forceAmount, ForceMode2D.Force);
         }
         
-        if (Input.GetKey(KeyCode.RightArrow))
+        if ((Input.GetKey(KeyCode.RightArrow))&(GameManager.isMovable))
         {
             // transform.position = new Vector3(transform.position.x + 0.05f, transform.position.y);
             if (_rb.velocity.x < 0)
