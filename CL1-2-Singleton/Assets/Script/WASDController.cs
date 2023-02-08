@@ -6,7 +6,7 @@ public class WASDController : MonoBehaviour
 {
     
     Rigidbody2D _rb;
-    public float forceAmount = 3f;
+    public float forceAmount = 2.5f;
     
     // Start is called before the first frame update
     void Start()

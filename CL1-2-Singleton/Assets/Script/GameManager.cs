@@ -173,9 +173,12 @@ public class GameManager : MonoBehaviour
         
     }
 
+    
+    
     IEnumerator StoryEnd()
     {
         isMovable = false;
+        GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
         
         PATH_STORY_END = Application.dataPath + DIR_DATA + FILE_STORY_END;
         
@@ -232,28 +235,6 @@ public class GameManager : MonoBehaviour
         }
         
     }
-
-    
-    IEnumerator TextFadeIn()
-    {
-        yield return null;
-    }
-
-    IEnumerator TextFadeOut()
-    {
-        yield return null;
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
