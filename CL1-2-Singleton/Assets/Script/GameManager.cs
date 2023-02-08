@@ -160,7 +160,7 @@ public class GameManager : MonoBehaviour
         
         // last 10 secs
 
-        yield return new WaitForSeconds(11.51f);
+        yield return new WaitForSeconds(11.53f);
         
         
         // text fade out
