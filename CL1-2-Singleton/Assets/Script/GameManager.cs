@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,21 +16,20 @@ public class GameManager : MonoBehaviour
     private const int highestLevel = 9;             // 总共关卡数：10
     private static bool isLoadingLevel = false;
 
-    public TextMeshPro screenText;
+    public Component blackScreen;
+    public GameObject txt;
+    public float fadeSpeed = 1.5f;
 
+    private const string DIR_DATA = "/Data/";
+    private const string FILE_STORY_START = "Story_Start.txt";
+    private const string FILE_STORY_END = "Story_End.txt";
+
+    private string PATH_STORY_START;
+    private string PATH_STORY_END;
     
+
     private void Awake()
     {
-        isLoadingLevel = false;             // 加载关卡锁解开
-        Time.timeScale = 1;                // 
-
-        currentLevel = SceneManager.GetActiveScene().buildIndex;        //让 currentlevel 值等于当前场景编号
-        
-        gameObjectArray = GameObject.FindGameObjectsWithTag("Player").Length;        // initialize gameobject array
-        Debug.Log("at awake, gameobjectarray:"+gameObjectArray);
-        
-        Debug.Log("level"+currentLevel+"awaked" );
-
         
         if (GM == null)
         {
@@ -38,6 +40,23 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
+        
+        isLoadingLevel = false;             // 加载关卡锁解开
+        Time.timeScale = 1;                // 
+
+        currentLevel = SceneManager.GetActiveScene().buildIndex;        //让 currentlevel 值等于当前场景编号
+        
+        gameObjectArray = GameObject.FindGameObjectsWithTag("Player").Length;        // initialize gameobject array
+        Debug.Log("at awake, gameobjectarray:"+gameObjectArray);
+        
+        Debug.Log("level"+currentLevel+"awaked" );
+        
+
+        
+
+        
+        
 
     }
 
@@ -47,7 +66,8 @@ public class GameManager : MonoBehaviour
     {
         if (currentLevel == 0)
         {
-            // 加载开始
+            StartCoroutine(StoryStart());
+
         }
 
         // 第一关：加载叙事，出现level number
@@ -61,7 +81,9 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(GameManager.currentLevel, LoadSceneMode.Single);
+            
         }
+        
 
         
         if (gameObjectArray <= 1)
@@ -81,7 +103,6 @@ public class GameManager : MonoBehaviour
                 isLoadingLevel = true;
                 Time.timeScale = 0;
                 
-                screenText.text = "YOU WIN!";
                 Debug.Log("shit" );
             }
         }
@@ -90,22 +111,51 @@ public class GameManager : MonoBehaviour
     }
 
 
-    IEnumerator FadeIn()
+    IEnumerator StoryStart()
     {
+        Time.timeScale = 0;
+
+        PATH_STORY_START = Application.dataPath + DIR_DATA + FILE_STORY_START;
+        PATH_STORY_END = Application.dataPath + DIR_DATA + FILE_STORY_END;
+        
+        blackScreen = GameObject.Find("Black").GetComponent<RawImage>();
+        txt = GameObject.Find("TXT");
+
+        txt.GetComponent<TMP_Text>().text = File.ReadAllText(PATH_STORY_START);
+
+        // black screen is here
+        // text fade in
+        
+        // last 10 secs
+        
+        // text fade out
+        // black screen gone
+
+        Time.timeScale = 1;
+        
         yield return null;
     }
-    
-    IEnumerator FadeOut()
+
+    IEnumerator StoryEnd()
     {
+        Time.timeScale = 0;
+        
+        // black fade in
+        
+        // last 2 secs
+        
+        // text fade in 
+
         yield return null;
     }
+
     
-    IEnumerator LoadText()
+    IEnumerator TextFadeIn()
     {
         yield return null;
     }
 
-    IEnumerator HideText()
+    IEnumerator TextFadeOut()
     {
         yield return null;
     }

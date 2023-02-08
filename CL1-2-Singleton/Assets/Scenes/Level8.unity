@@ -1181,7 +1181,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &76725989
 GameObject:
@@ -4724,7 +4724,7 @@ Transform:
   - {fileID: 1448115855}
   - {fileID: 930879495}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &206955324
 GameObject:
@@ -7064,7 +7064,7 @@ GameObject:
   - component: {fileID: 302012190}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7154,7 +7154,7 @@ RectTransform:
   - {fileID: 1960914262}
   - {fileID: 433193174}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -45681,7 +45681,7 @@ Transform:
   - {fileID: 1329941602}
   - {fileID: 1090165279}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &920186869600164172
 PrefabInstance:
@@ -45838,7 +45838,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2174361525110117166, guid: 51e0539fe5fcb0941810ff76e417846d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3299217488804492327, guid: 51e0539fe5fcb0941810ff76e417846d, type: 3}
       propertyPath: m_SortingOrder
