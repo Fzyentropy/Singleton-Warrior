@@ -19214,7 +19214,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -5
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.04500413, g: 0.16324674, b: 0.3490566, a: 1}
+  m_Color: {r: 0.05882353, g: 0.05882353, b: 0.05882353, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -34709,11 +34709,11 @@ PrefabInstance:
     - target: {fileID: 7743329567532654350, guid: 51e0539fe5fcb0941810ff76e417846d, type: 3}
       propertyPath: winText
       value: 
-      objectReference: {fileID: 7743329567355030718}
+      objectReference: {fileID: 0}
     - target: {fileID: 7743329567532654350, guid: 51e0539fe5fcb0941810ff76e417846d, type: 3}
       propertyPath: screenText
       value: 
-      objectReference: {fileID: 7743329567355030718}
+      objectReference: {fileID: 0}
     - target: {fileID: 7743329567532654351, guid: 51e0539fe5fcb0941810ff76e417846d, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -34756,14 +34756,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51e0539fe5fcb0941810ff76e417846d, type: 3}
---- !u!114 &7743329567355030718 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8303630655835746809, guid: 51e0539fe5fcb0941810ff76e417846d, type: 3}
-  m_PrefabInstance: {fileID: 7743329567355030717}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
