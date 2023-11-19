@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject blackScreen;
     public GameObject txt;
+    public TMP_Text txtText;
+    public GameObject test;
 
     private const string DIR_DATA = "/Data/";
     private const string FILE_STORY_START = "Story_Start.txt";
@@ -68,6 +70,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentLevel == 0)
         {
+            
             StartCoroutine(StoryStart());
 
         }
@@ -119,16 +122,24 @@ public class GameManager : MonoBehaviour
         
         PATH_STORY_START = Application.dataPath + DIR_DATA + FILE_STORY_START;
         
-        blackScreen = GameObject.Find("Black");
-        txt = GameObject.Find("TXT");
+        if (blackScreen == null)
+        {
+            blackScreen = GameObject.Find("Black");
+        }
+        if (txt == null)
+        {
+            txt = GameObject.Find("TXT");
+        }
+        txtText = txt.GetComponent<TMP_Text>();
 
         
         // file is here. file I/O
 
-        txt.GetComponent<TMP_Text>().text = "";
-        txt.GetComponent<TMP_Text>().color = new Color(1,1,1,0);
-        txt.GetComponent<TMP_Text>().text = File.ReadAllText(PATH_STORY_START);
-        
+        txtText.text = "";
+        txtText.color = new Color(1,1,1,0);
+        // txtText.text = File.ReadAllText(PATH_STORY_START);
+        txtText.text =
+            "In the kingdom of multiton, everyone has multiple selves, they are able to play multiple roles in their multiple lives, their time are multiplied. However, one day, Matt the Singleton Demon came to this kingdom. He forced everyone in the kingdom to singletonize their multiple selves and became singleton. This brought great disaster to them. A Multi-Worrier decides to defeat the Singleton Demon and save the kingdom. He puts on his yellow armor, and comes to demon's realm. First of all, he has to singleton himselves to face the demon.....";
         
         // black screen is here
         
@@ -144,18 +155,44 @@ public class GameManager : MonoBehaviour
         
         float textFadeSpeed = 0.05f;
         float textFadeTime = 0.04f;
+        
+        
+        // 尝试解决 WebGL bug
+        
+        /*float textFadeDuration = 1f;
+        float elapsedTime = 0;
+        Color transparentColor = new Color(1, 1, 1, 0); // 完全透明的白色
+        Color whiteColor = new Color(1, 1, 1, 1); // 不透明的白色
 
+        // 开始时文本完全透明
+        txtText.color = transparentColor;
+        
+        Instantiate(test, new Vector3(0, 0, 0), Quaternion.identity);
+
+        while (txtText.color.a <= 0.95f)
+        {
+            txtText.color = new Color(1, 1, 1, txtText.color.a + textFadeSpeed);
+            yield return new WaitForSeconds(textFadeTime);
+        }
+
+        // 确保淡入结束时文本是不透明的白色
+        txtText.color = whiteColor;
+        
+        Instantiate(test, new Vector3(0, 0, 0), Quaternion.identity);*/
+        
+        
         while (true)
         {
             if (txt.GetComponent<TMP_Text>().color.a >= 1)
             { Debug.Log("break"); break; }
 
             txt.GetComponent<TMP_Text>().color = new Color(1,1,1,txt.GetComponent<TMP_Text>().color.a + textFadeSpeed);
-            Debug.Log("waht");
+            Debug.Log(txt.GetComponent<TMP_Text>().color.a);
 
             yield return new WaitForSeconds(textFadeTime);
             
         }
+        
         
         
         // last 10 secs
@@ -180,19 +217,28 @@ public class GameManager : MonoBehaviour
         isMovable = false;
         GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
         
-        PATH_STORY_END = Application.dataPath + DIR_DATA + FILE_STORY_END;
+        // PATH_STORY_END = Application.dataPath + DIR_DATA + FILE_STORY_END;
         
-        blackScreen = GameObject.Find("Black");
-        txt = GameObject.Find("TXT");
+        if (blackScreen == null)
+        {
+            blackScreen = GameObject.Find("Black");
+        }
+        if (txt == null)
+        {
+            txt = GameObject.Find("TXT");
+        }
+        txtText = txt.GetComponent<TMP_Text>();
+        
 
         if(!blackScreen.activeSelf) {blackScreen.SetActive(true);}
         blackScreen.GetComponent<RawImage>().color = Color.clear;
         
         if(!txt.activeSelf){txt.SetActive(true);}
-        txt.GetComponent<TMP_Text>().text = "";
-        txt.GetComponent<TMP_Text>().color = new Color(1,1,1,0);
-        txt.GetComponent<TMP_Text>().text = File.ReadAllText(PATH_STORY_END);
-        
+        txtText.text = "";
+        txtText.color = new Color(1,1,1,0);
+        // txtText.text = File.ReadAllText(PATH_STORY_END);
+        txtText.text =
+            "Passed by the maze in the demon's realm, the Multi-Worrier finally faces Matt the Singleton Demon himself. However, the worrier lost too much power during singletoning himselves. Matt uses his Ultra Power of WASDController and gives the worrier the final punch. The worrier is beaten down on the ground..... After the failure of the worrier, no one can stop Matt singletoning the world any more.....";
         
         // black fade in
         
